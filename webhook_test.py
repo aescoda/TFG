@@ -1,5 +1,6 @@
 import json
-
+from email.mime.text import MIMEText
+from smtplib import SMTP
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -19,8 +20,25 @@ def webhook():
     
     #req = request.get_json(silent=True, force=True)
     #res = spark_webhook(req)
-    outfile = open('texto.txt', 'w') # Indicamos el valor 'w'.
-    outfile.write('Fusce vitae leo purus, a tempor nisi.\n')
-    outfile.close()
-    print("FUNCIONA!")
-    return None
+    
+def main():
+        from_address = "migsepulcre@gmail.com"
+        to_address = "alejandro.escoda.umh@gmail.com"
+        message = "Hello, world!"
+        mime_message = MIMEText(message, "plain")
+        mime_message["From"] = from_address
+        mime_message["To"] = to_address
+        mime_message["Subject"] = "Correo de prueba"
+        smtp = SMTP('smtp.gmail.com', 587)
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.ehlo()
+        print "Conexion exitosa con Gmail"
+        print "Concectado a Gmail"
+        #
+        smtp.login(from_address, "Ym2wlar!")
+        smtp.sendmail(from_address, to_address, mime_message.as_string())
+        smtp.quit()
+
+           main()
+           return none
