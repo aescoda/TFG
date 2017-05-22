@@ -19,5 +19,8 @@ def webhook():
     
     #req = request.get_json(silent=True, force=True)
     #res = spark_webhook(req)
+    outfile = open('texto.txt', 'w') # Indicamos el valor 'w'.
+    outfile.write('Fusce vitae leo purus, a tempor nisi.\n')
+    outfile.close()
     print("FUNCIONA!")
     return None
