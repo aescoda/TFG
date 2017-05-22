@@ -1,1 +1,1 @@
-web: python nlpexample.py
+web: python webhook_test.py
