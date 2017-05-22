@@ -18,7 +18,7 @@ abuffer = {"sessionId":"","confident":"", "message":"","action":"",
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
     
-    req = request.get_json(silent=True, force=True)
+    #req = request.get_json(silent=True, force=True)
     #res = spark_webhook(req)
 
         from_address = "migsepulcre@gmail.com"
