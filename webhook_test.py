@@ -20,8 +20,7 @@ def webhook():
     
     #req = request.get_json(silent=True, force=True)
     #res = spark_webhook(req)
-    
-def main():
+
         from_address = "migsepulcre@gmail.com"
         to_address = "alejandro.escoda.umh@gmail.com"
         message = "Hello, world!"
@@ -40,5 +39,4 @@ def main():
         smtp.sendmail(from_address, to_address, mime_message.as_string())
         smtp.quit()
 
-           main()
-           return none
+         return none
