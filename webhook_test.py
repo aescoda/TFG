@@ -3,8 +3,6 @@
 
 
 from flask import Flask
-from flask import request
-from flask import make_response
 from email.mime.text import MIMEText
 from smtplib import SMTP
 
