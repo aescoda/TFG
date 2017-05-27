@@ -3,7 +3,6 @@
 
 
 from flask import Flask
-import Emailing
 import os
 
 # Flask app should start in global layout
@@ -11,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('\webhook', methods=['POST','GET'])
 def webhook():
-    mail_cheking();
+    print "Webhook"
     return none
 
 if __name__ == '__main__':
