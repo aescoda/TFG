@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
-    hi = mail_cheking();
+    hi = mail_checking();
     return none
 
 if __name__ == '__main__':
