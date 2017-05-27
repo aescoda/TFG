@@ -3,7 +3,7 @@
 
 
 from flask import Flask
-import emailing
+import Emailing
 import os
 
 # Flask app should start in global layout
