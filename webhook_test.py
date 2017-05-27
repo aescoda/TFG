@@ -8,10 +8,10 @@ import emailing
 # Flask app should start in global layout
 app = Flask(__name__)
 
-@app.route('', methods=['POST','GET'])
-def main():
-    mail_cheking();
-    return none
+@app.route('\webhook', methods=['POST','GET'])
+def webhook:
+   mail_cheking();
+   return none
 
 if __name__ == '__main__':
     app.run()
