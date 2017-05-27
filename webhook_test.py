@@ -4,14 +4,14 @@
 
 from flask import Flask
 import os
-
+import Emailing
 # Flask app should start in global layout
 app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
-    print "Webhook"
-    return "webhook"
+    hi = mail_cheking();
+    return none
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
