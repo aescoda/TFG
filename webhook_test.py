@@ -4,7 +4,8 @@
 
 from flask import Flask
 import os
-import Emailing
+from email.mime.text import MIMEText
+from smtplib import SMTP
 # Flask app should start in global layout
 app = Flask(__name__)
 
