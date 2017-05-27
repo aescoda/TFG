@@ -28,5 +28,5 @@ def webhook():
         return none
 
 if __name__ == "__main__":
-           app.run
+           app.run()
            
