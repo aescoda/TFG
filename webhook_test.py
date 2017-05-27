@@ -8,10 +8,10 @@ import os
 # Flask app should start in global layout
 app = Flask(__name__)
 
-@app.route('\webhook', methods=['POST','GET'])
+@app.route("\webhook", methods=['POST','GET'])
 def webhook():
     print "Webhook"
-    return none
+    return "webhook"
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
