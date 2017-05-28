@@ -9,7 +9,7 @@ from smtplib import SMTP
 # Flask app should start in global layout
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST','GET'])
+@app.route("/webhook", methods=['POST','GET'])
 def webhook():
     from_address = "migsepulcre@gmail.com"
     to_address = "alejandro.escoda.umh@gmail.com"
