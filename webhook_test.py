@@ -29,7 +29,7 @@ def webhook():
     smtp.sendmail(from_address, to_address, mime_message.as_string())
     smtp.quit()
     print "fin"
-    return none
+    return None
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
