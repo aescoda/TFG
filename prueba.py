@@ -8,24 +8,18 @@ app = Flask(__name__)
 
 @app.route("/webhook", methods=["POST","GET"])
 def webhook():
+    print "Email1"
     from_address = "migsepulcre@gmail.com"
+    print"Email1"
+    print "email2"
     to_address = "alejandro.escoda.umh@gmail.com"
+    print "email2"
     message = "Hello, world!"
     mime_message = MIMEText(message, "plain")
     mime_message["From"] = from_address
     mime_message["To"] = to_address
     mime_message["Subject"] = "Correo de prueba"
-    smtp = SMTP('smtp.gmail.com', 587)
-    smtp.ehlo()
-    smtp.starttls()
-    smtp.ehlo()
-    print "Conexion exitosa con Gmail"
-    print "Concectado a Gmail"
-    #
-    smtp.login(from_address, "Ym2wlar!")
-    smtp.sendmail(from_address, to_address, mime_message.as_string())
-    smtp.quit()
-    print "fin"
+    print "Ha salido"
     return None
 
 if __name__ == "__main__":
