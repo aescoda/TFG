@@ -22,7 +22,7 @@ def mail_checking():
     print "Conexion exitosa con Gmail"
     print "Concectado a Gmail"
     #
-    smtp.login(from_address, "Ym2wlar!")
+    smtp.login(from_address,)
     smtp.sendmail(from_address, to_address, mime_message.as_string())
     smtp.quit()
     print "fin"
