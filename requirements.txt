@@ -1,4 +1,4 @@
-Flask==0.10.1
+Flask==0.12.2
 requests
 Jinja2==2.6
 Werkzeug==0.8.3
