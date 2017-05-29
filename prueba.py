@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
     print "Email1"
-    return "hola mundo!"
+    return None
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
