@@ -8,8 +8,10 @@ app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
-    print "Email1"
-    return "holamundoa"
+    # Every message from Spark is received here. I will be analyzed and sent to
+    # api.ai response will then sent back to Spark
+    print "email"
+    return None
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
