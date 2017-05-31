@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import make_response
 import os
-from xml.etree import ElementTree
+import xml.etree.ElementTree as ET
 
 
 app = Flask(__name__)
@@ -13,9 +13,8 @@ def webhook():
     # api.ai response will then sent back to Spark
     print "email"
     req = request.data
-    print type(req)
     print req
-    data = ElementTree.ElementTree(ElementTree.fromstring(req))
+    tree = ET.ElementTree(ET.fromstring(req))
     print "ha hecho el XML"
     nombre = data.findall('comida/nombre')
     print "ha encontrado"
