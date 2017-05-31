@@ -18,7 +18,7 @@ def webhook():
     print "ha hecho el XML"
     nombre = tree.findall('country/year')
     for c in nombre:
-        print c
+        print c.text
     print "ha encontrado"
     return None
 
