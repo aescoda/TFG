@@ -13,6 +13,7 @@ def webhook():
     # api.ai response will then sent back to Spark
     print "email"
     req = request.data
+    print req
     data = ElementTree.fromstring(req)
     print "ha hecho el XML"
     nombre = data.findall('comida/nombre')
