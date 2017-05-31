@@ -11,7 +11,7 @@ def webhook():
     # Every message from Spark is received here. I will be analyzed and sent to
     # api.ai response will then sent back to Spark
     print "email"
-    req = request.data()
+    req = request.data
     print "req"
     return None
 
