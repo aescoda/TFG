@@ -14,7 +14,8 @@ def webhook():
     print "email"
     req = request.data
     print req
-    tree = ET.ElementTree(ET.fromstring(req))
+    tree = ET.fromstring(req)
+    
     print "ha hecho el XML"
     nombre = data.findall('comida/nombre')
     print "ha encontrado"
