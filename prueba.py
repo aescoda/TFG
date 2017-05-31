@@ -13,6 +13,7 @@ def webhook():
     # api.ai response will then sent back to Spark
     print "email"
     req = request.data
+    print type(req)
     print req
     data = ElementTree.ElementTree(ElementTree.fromstring(req))
     print "ha hecho el XML"
