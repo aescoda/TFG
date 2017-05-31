@@ -14,7 +14,7 @@ def webhook():
     print "email"
     req = request.data
     data = ElementTree.fromstring(req)
-    nombre = data.('comida/nombre')
+    nombre = data.findall('comida/nombre')
     print nombre
     print "caca"
     return None
