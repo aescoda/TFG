@@ -12,7 +12,7 @@ def webhook():
     # api.ai response will then sent back to Spark
     print "email"
     req = request.data
-    print "req"
+    print req
     return None
 
 if __name__ == '__main__':
