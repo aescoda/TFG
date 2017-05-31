@@ -16,10 +16,10 @@ def webhook():
     print req
     tree = ET.ElementTree(ET.fromstring(req))
     print "ha hecho el XML"
-    nombre = data.findall('comida/nombre')
+    nombre = tree.findall('country name/year')
+    for c in nombre:
+        print c
     print "ha encontrado"
-    print nombre
-    print "caca"
     return None
 
 if __name__ == '__main__':
