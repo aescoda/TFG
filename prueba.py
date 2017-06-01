@@ -16,7 +16,7 @@ def webhook():
     print req
     tree = ET.ElementTree(ET.fromstring(req))
     print "ha hecho el XML"
-    nombre = tree.findall('complexType/sequence/element')
+    nombre = tree.findall('country/year')
     for c in nombre:
         print c.text
     print "ha encontrado"
