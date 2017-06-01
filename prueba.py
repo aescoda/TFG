@@ -14,12 +14,12 @@ def webhook():
     print "email"
     req = request.data
     print req
-    tree = ET.ElementTree(ET.fromstring(req))
+    #tree = ET.ElementTree(ET.fromstring(req))
     print "ha hecho el XML"
-    nombre = tree.findall('country/year')
-    for c in nombre:
-        print c.text
-    print "ha encontrado"
+    #nombre = tree.findall('country/year')
+    #for c in nombre:
+        #print c.text
+    #print "ha encontrado"
     return None
 
 if __name__ == '__main__':
