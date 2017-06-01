@@ -13,6 +13,7 @@ def webhook():
     # api.ai response will then sent back to Spark
     print "email"
     req = request.form
+    print req
     xml = req['data']
     #No se si necesito un tipo elementtree o un element...
     doc = ET.fromstring(xml)
@@ -25,8 +26,7 @@ def webhook():
     #for c in nombre2:
         #print c.text
     print "AHORA CON DOBLE ET."
-    tu1 = ET.ElementTree(ET.parse(xml))
-    print "PRUEBO A IMPRIMIR EL XML"
+    
     return None
 
 if __name__ == '__main__':
