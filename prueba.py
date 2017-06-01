@@ -17,16 +17,14 @@ def webhook():
     print "TENEMOS LOS DATOS"    
     print "INTENTAMOS FROMSTRING"
     doc = ET.fromstring(xml)
-    print "INTENTAMOS PARSE"
-    tu = ET.parse(xml)
-    print "AHORA CON DOBLE ET."
+    print doc
     doc1 = ET.ElementTree(ET.fromstring(xml))
-    tu1 = Et.ElementTree(ET.parse(xml))
-    print "PRUEBO A IMPRIMIR EL XML"
     nombre = xml.findall('SimStateChange/iccid')
     for c in nombre:
         print c.text
-    print "ha encontrado"
+    print "AHORA CON DOBLE ET."
+    tu1 = Et.ElementTree(ET.parse(xml))
+    print "PRUEBO A IMPRIMIR EL XML"
     return None
 
 if __name__ == '__main__':
