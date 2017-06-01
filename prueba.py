@@ -14,11 +14,16 @@ def webhook():
     print "email"
     req = request.form
     xml = req['data']
-    print xml
-    tip = type(xml)
-    print tip
+    print "TENEMOS LOS DATOS
+    
+    print "INTENTAMOS FROMSTRING"
     doc = ET.fromstring(xml)
-    print "ha hecho el XML"
+    print "INTENTAMOS PARSE"
+    tu = ET.parse(xml)
+    print "AHORA CON DOBLE ET."
+    doc1 = ET.ElementTree(ET.fromstring(xml))
+    tu1 = Et.ElementTree(ET.parse(xml))
+    print "PRUEBO A IMPRIMIR EL XML"
     nombre = xml.findall('SimStateChange/iccid')
     for c in nombre:
         print c.text
