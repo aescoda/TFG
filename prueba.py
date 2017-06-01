@@ -14,10 +14,11 @@ def webhook():
     print "email"
     req = request.form
     xml = req['data']
+    #No se si necesito un tipo elementtree o un element...
     doc = ET.fromstring(xml)
     doc1 = ET.ElementTree(ET.fromstring(xml))
     print type(doc1)
-    nombre = doc1.findall('SimStateChange/iccid')
+    nombre = doc1.findall('iccid')
     for c in nombre:
         print c.text
     #nombre2 = doc1.findall('SimStateChange/iccid') 
