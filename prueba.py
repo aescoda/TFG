@@ -17,7 +17,7 @@ def webhook():
     print xml
     tip = type(xml)
     print tip
-    doc = ET.parse(tip)
+    doc = ET.fromstring(tip)
     print "ha hecho el XML"
     nombre = doc.findall('SimStateChange/iccid')
     for c in nombre:
