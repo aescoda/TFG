@@ -15,6 +15,7 @@ def webhook():
     req = request.form
     xml = req['data']
     doc = ET.fromstring(xml)
+    print type(doc)
     #doc1 = ET.ElementTree(ET.fromstring(xml))
     nombre = doc.findall('SimStateChange/iccid')
     for c in nombre:
