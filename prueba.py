@@ -12,7 +12,7 @@ def webhook():
     # Every message from Spark is received here. I will be analyzed and sent to
     # api.ai response will then sent back to Spark
     print "email"
-    req = request.get_data(cache=True, as_text=False, parse_form_data=False)
+    req = request.form
     cad = len(req)
     print cad
     print req
