@@ -14,8 +14,7 @@ def webhook():
     print "email"
     req = request.form
     xml = req['data']
-    print "TENEMOS LOS DATOS
-    
+    print "TENEMOS LOS DATOS"    
     print "INTENTAMOS FROMSTRING"
     doc = ET.fromstring(xml)
     print "INTENTAMOS PARSE"
