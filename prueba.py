@@ -17,10 +17,8 @@ def webhook():
     print xml
     tip = type(xml)
     print tip
-    print req
-    tree = ET.ElementTree(ET.fromstring(req))
     print "ha hecho el XML"
-    nombre = tree.findall('country/year')
+    nombre = tip.findall('SimStateChange/iccid')
     for c in nombre:
         print c.text
     print "ha encontrado"
