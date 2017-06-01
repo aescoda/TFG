@@ -13,6 +13,14 @@ def webhook():
     # api.ai response will then sent back to Spark
     print "email"
     req = request.form
+    url = request.args
+    head = request.headers
+    url2 = request.url
+    url3 = request.url_root
+    print url3
+    print head
+    print url2
+    print url
     print req
     xml = req['data']
     #No se si necesito un tipo elementtree o un element...
