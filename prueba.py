@@ -19,8 +19,11 @@ def webhook():
     doc = ET.fromstring(xml)
     print doc
     doc1 = ET.ElementTree(ET.fromstring(xml))
-    nombre = xml.findall('SimStateChange/iccid')
+    nombre = doc.findall('SimStateChange/iccid')
     for c in nombre:
+        print c.text
+    nombre2 = doc1.findall('SimStateChange/iccid') 
+    for c in nombre2:
         print c.text
     print "AHORA CON DOBLE ET."
     tu1 = Et.ElementTree(ET.parse(xml))
