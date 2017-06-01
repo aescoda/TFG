@@ -13,8 +13,8 @@ def webhook():
     # api.ai response will then sent back to Spark
     print "email"
     req = request.form
-    cad = len(req)
-    print cad
+    xml = req['data']
+    print xml
     print req
     tree = ET.ElementTree(ET.fromstring(req))
     print "ha hecho el XML"
