@@ -17,12 +17,18 @@ def webhook():
     head = request.headers
     url2 = request.url
     url3 = request.url_root
+    print "esto es url.root"
     print url3
+    print "esto es cabecera"
     print head
+    print "esto es url"
     print url2
+    print "esto es los args"
     print url
+    "esto es toda la info"
     print req
     xml = req['data']
+    "esto es solo los datos
     print xml
     #No se si necesito un tipo elementtree o un element...
     doc = ET.fromstring(xml)
