@@ -28,7 +28,7 @@ def webhook():
     print "esto es toda la info"
     print req
     xml = req['data']
-    "esto es solo los datos
+    print "esto es solo los datos
     print xml
     #No se si necesito un tipo elementtree o un element...
     doc = ET.fromstring(xml)
