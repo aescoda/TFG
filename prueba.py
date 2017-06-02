@@ -14,7 +14,7 @@ def webhook():
     req = request.form
     print type(req)
     xml = req['data']
-    type (xml)
+    print type (xml)
     print type (ET.fromstring(xml))
     doc = ET.ElementTree(ET.fromstring(xml))
     print type(doc)
