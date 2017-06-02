@@ -25,7 +25,7 @@ def webhook():
     print url2
     print "esto es los args"
     print url
-    "esto es toda la info"
+    print "esto es toda la info"
     print req
     xml = req['data']
     "esto es solo los datos
