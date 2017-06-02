@@ -15,9 +15,16 @@ def webhook():
     xml = req['data']
     doc = ET.ElementTree(ET.fromstring(xml))
     print type(doc)
-    nombre = doc1.find('iccid')
+    nombre = doc.find('iccid')
+    nombre3 = doc.find('complexType/sequence/element')
+    print nombre3
+    nombre2 = doc.findall('iccid')
     print nombre
-    for c in nombre:
+    nombre4 = doc.findall('complexType/sequence/element')
+    for c in nombre4:
+        print c.text
+    print nombre4
+    for c in nombre2:
         print c.text
     #nombre2 = doc1.findall('SimStateChange/iccid') 
     #for c in nombre2:
