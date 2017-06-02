@@ -11,30 +11,12 @@ app = Flask(__name__)
 def webhook():
     # Every message from Spark is received here. I will be analyzed and sent to
     # api.ai response will then sent back to Spark
-    print "email"
     req = request.form
-    url = request.args
-    head = request.headers
-    url2 = request.url
-    url3 = request.url_root
-    print "esto es url.root"
-    print url3
-    print "esto es cabecera"
-    print head
-    print "esto es url"
-    print url2
-    print "esto es los args"
-    print url
-    print "esto es toda la info"
-    print req
     xml = req['data']
-    print "esto es solo los datos"
-    print xml
-    #No se si necesito un tipo elementtree o un element...
-    doc = ET.fromstring(xml)
-    doc1 = ET.ElementTree(ET.fromstring(xml))
-    print type(doc1)
-    nombre = doc1.findall('iccid')
+    doc = ET.ElementTree(ET.fromstring(xml))
+    print type(doc)
+    nombre = doc1.find('iccid')
+    print nombre
     for c in nombre:
         print c.text
     #nombre2 = doc1.findall('SimStateChange/iccid') 
