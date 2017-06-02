@@ -23,6 +23,7 @@ def webhook():
     print url
     print req
     xml = req['data']
+    print xml
     #No se si necesito un tipo elementtree o un element...
     doc = ET.fromstring(xml)
     doc1 = ET.ElementTree(ET.fromstring(xml))
