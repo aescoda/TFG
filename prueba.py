@@ -12,7 +12,10 @@ def webhook():
     # Every message from Spark is received here. I will be analyzed and sent to
     # api.ai response will then sent back to Spark
     req = request.form
+    print type(req)
     xml = req['data']
+    type (xml)
+    print type (ET.fromstring(xml))
     doc = ET.ElementTree(ET.fromstring(xml))
     print type(doc)
     nombre = doc.find('iccid')
@@ -26,12 +29,8 @@ def webhook():
     print nombre4
     for c in nombre2:
         print c.text
-    #nombre2 = doc1.findall('SimStateChange/iccid') 
-    #for c in nombre2:
-        #print c.text
     print "AHORA CON DOBLE ET."
-    
-    return None
+    return status(200)
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
