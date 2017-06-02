@@ -30,7 +30,7 @@ def webhook():
     for c in nombre2:
         print c.text
     print "AHORA CON DOBLE ET."
-    return status(200)
+    return None
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
