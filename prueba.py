@@ -18,8 +18,13 @@ def webhook():
     print type (xml)
     print len(xml)
     print type (ET.fromstring(xml))
-    doc = ET.ElementTree(ET.fromstring(xml))
+    doc0 = ET.fromstring(xml)
+    doc1 = ET.ElementTree(ET.fromstring(xml))
     print type(doc)
+      
+    print "VAMOS A SACAR LOS PUTOS DATOS"
+    doc0 = doc0.getroot()
+    doc1 = doc1.getroot()   
     print "AHORA CON DOBLE ET."
     return "hola"
 
