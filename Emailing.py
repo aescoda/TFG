@@ -1,15 +1,11 @@
-    #!/usr/bin/env python
-    # -*- coding: utf-8 -*-
-
-
 from email.mime.text import MIMEText
 from smtplib import SMTP
 
 
 
-def mail_checking():
-    from_address = "migsepulcre@gmail.com"
-    to_address = "alejandro.escoda.umh@gmail.com"
+def mail_checking(str email):
+    from_address = os.environ.get('EMAIL_USER', None))
+    to_address = email
     message = "Hello, world!"
     mime_message = MIMEText(message, "plain")
     mime_message["From"] = from_address
@@ -22,8 +18,8 @@ def mail_checking():
     print "Conexion exitosa con Gmail"
     print "Concectado a Gmail"
     #
-    smtp.login(from_address,)
+    smtp.login(from_address, "Ym2wlar!")
     smtp.sendmail(from_address, to_address, mime_message.as_string())
     smtp.quit()
     print "fin"
-    return "Hello"
+    return None
