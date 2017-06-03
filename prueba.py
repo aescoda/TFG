@@ -16,23 +16,12 @@ def webhook():
     xml = req['data']
     print xml;
     print type (xml)
+    print len(xml)
     print type (ET.fromstring(xml))
-    print type (ET.parse(xml))
     doc = ET.ElementTree(ET.fromstring(xml))
     print type(doc)
-    nombre = doc.find('iccid')
-    nombre3 = doc.find('complexType/sequence/element')
-    print nombre3
-    nombre2 = doc.findall('iccid')
-    print nombre
-    nombre4 = doc.findall('complexType/sequence/element')
-    for c in nombre4:
-        print c.text
-    print nombre4
-    for c in nombre2:
-        print c.text
     print "AHORA CON DOBLE ET."
-    return None
+    return "hola"
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
