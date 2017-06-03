@@ -13,6 +13,9 @@ def webhook():
     req = request.form
     print type(req)
     xml = req['data']
+    #Mando un codigo 200 para que esto no pete?
+    #Ahora es cuando hago un get a Jasper para conseguir el email de mi cliente
+    email_alert(email)
     doc0 = ET.fromstring(xml)
     print doc0[0].text
     print doc0[1].text
