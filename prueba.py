@@ -25,7 +25,13 @@ def webhook():
     print "VAMOS A SACAR LOS PUTOS DATOS"
     doc0 = doc0.getroot()
     doc1 = doc1.getroot()   
+    for child in doc0:
+    print(child.tag, child.attrib)
+
     print "AHORA CON DOBLE ET."
+    
+    for child in do1:
+    print(child.tag, child.attrib)
     return "hola"
 
 if __name__ == '__main__':
