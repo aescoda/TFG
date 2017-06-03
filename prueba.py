@@ -17,6 +17,7 @@ def webhook():
     print xml;
     print type (xml)
     print type (ET.fromstring(xml))
+    print type (ET.parse(xml))
     doc = ET.ElementTree(ET.fromstring(xml))
     print type(doc)
     nombre = doc.find('iccid')
