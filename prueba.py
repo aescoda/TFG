@@ -19,11 +19,11 @@ def webhook():
     print len(xml)
     print type (ET.fromstring(xml))
     doc0 = ET.fromstring(xml)
-    doc1 = ET.ElementTree(ET.fromstring(xml))
-    print type(doc1)
     print doc0[0].text
-    print doc1[0][1].text
-    print "VAMOS A SACAR LOS PUTOS DATOS"
+    print doc0[1].text
+    print doc0[2].text
+    print doc0[3].text
+     print "VAMOS A SACAR LOS PUTOS DATOS"
     return "hola"
    
 if __name__ == '__main__':
