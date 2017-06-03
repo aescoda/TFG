@@ -4,7 +4,8 @@ from smtplib import SMTP
 
 
 def mail_checking(email):
-    from_address = os.environ.get('EMAIL_USER', None))
+    from_address = os.environ.get('EMAIL_USER', None)
+    pass = os.environ.get('EMAIL_PASS',None)
     to_address = email
     message = "Hello, world!"
     mime_message = MIMEText(message, "plain")
