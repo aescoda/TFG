@@ -3,26 +3,22 @@ from flask import request
 from flask import make_response
 import os
 import xml.etree.ElementTree as ET
+import Emailing
 
 
 app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
-    # Every message from Spark is received here. I will be analyzed and sent to
-    # api.ai response will then sent back to Spark
     req = request.form
     print type(req)
     xml = req['data']
-    print xml;
-    print type (xml)
-    print len(xml)
-    print type (ET.fromstring(xml))
     doc0 = ET.fromstring(xml)
     print doc0[0].text
     print doc0[1].text
     print doc0[2].text
     print doc0[3].text
+    
     print "VAMOS A SACAR LOS PUTOS DATOS"
     return "hola"
    
