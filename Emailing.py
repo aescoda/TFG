@@ -3,7 +3,7 @@ from smtplib import SMTP
 
 
 
-def mail_checking(str email):
+def mail_checking(email):
     from_address = os.environ.get('EMAIL_USER', None))
     to_address = email
     message = "Hello, world!"
