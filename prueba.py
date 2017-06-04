@@ -11,9 +11,9 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
     req = request.form
-    print type(req)
     xml = req['data']
     #Mando un codigo 200 para que esto no pete?
+    get_email()
     #Ahora es cuando hago un get a Jasper para conseguir el email de mi cliente
     email_alert(email)
     doc0 = ET.fromstring(xml)
@@ -23,7 +23,7 @@ def webhook():
     print doc0[3].text
     
     print "VAMOS A SACAR LOS PUTOS DATOS"
-    return "hola"
+    return ""
    
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
