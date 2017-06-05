@@ -9,10 +9,11 @@ from threading import Thread
 
 app = Flask(__name__)
 
-def get_email(xml):
+def send_email(xml):
     data = ET.fromstring(xml)
     iccid = req[0]
-    get_admin()
+    get_email()
+    #activar webhook del server.
     
 
 
@@ -20,9 +21,14 @@ def get_email(xml):
 def webhook():
     req = request.form
     xml = req['data']
-    t = Thread(target=emailing, args=(xml,))
+    t = Thread(target=send_email, args=(xml,))
     t.start()
     return '',200
+    
+    
+@app.route('/response', methods=['POST','GET'])
+def response:
+    
    
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
