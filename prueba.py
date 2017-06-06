@@ -17,7 +17,7 @@ def send_email(xml):
 
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
-    print "1º webhook"
+    print "webhook"
     t = Thread(target=send_email, args=(xml,))
     t.start()
     print "acabando"
