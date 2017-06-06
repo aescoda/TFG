@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 def send_email():
     print "Funciona el hilo"
-   
+    return None
     
 
 
