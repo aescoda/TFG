@@ -9,7 +9,7 @@ from threading import Thread
 
 app = Flask(__name__)
 
-def send_email():
+def send_email(xml):
     print "Funciona el hilo"
     return None
     
@@ -17,11 +17,10 @@ def send_email():
 
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
-    req = request.form
-    xml = req['data']
+    print "1º webhook"
     t = Thread(target=send_email, args=(xml,))
     t.start()
-    print xml
+    print "acabando"
     return '',200
     
     
