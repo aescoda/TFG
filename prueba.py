@@ -10,7 +10,7 @@ from threading import Thread
 app = Flask(__name__)
 
 def send_email(xml):
-    print "Funciona el hilo"
+    print xml
     return None
     
 
@@ -18,6 +18,7 @@ def send_email(xml):
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
     print "webhook"
+    xml = "Funciona el hilo"
     t = Thread(target=send_email, args=(xml,))
     t.start()
     print "acabando"
