@@ -24,8 +24,8 @@ def webhook():
     return '',200
     
     
-@app.route('/response', methods=['POST','GET'])
-def response:
+#app.route('/response', methods=['POST','GET'])
+#def response:
     
    
 if __name__ == '__main__':
