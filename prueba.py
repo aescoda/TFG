@@ -9,11 +9,9 @@ from threading import Thread
 
 app = Flask(__name__)
 
-def send_email(xml):
-    data = ET.fromstring(xml)
-    iccid = req[0]
-    get_email()
-    #activar webhook del server.
+def send_email():
+    print "Funciona el hilo"
+   
     
 
 
@@ -23,6 +21,7 @@ def webhook():
     xml = req['data']
     t = Thread(target=send_email, args=(xml,))
     t.start()
+    print xml
     return '',200
     
     
