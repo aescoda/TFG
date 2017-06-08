@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 def send_email(xml):
     
+    service = 'terminal'
     wsdlurl= os.environ.get('WSDL_FILE', None)
     username= os.environ.get('USER_NAME', None)
     password= os.environ.get('USER_PASS', None)
@@ -20,7 +21,7 @@ def send_email(xml):
 
     print("***** create the SOAP client")
     clientService = Client(wsdlurl)
-    print clientService
+    #print clientService
 
     print("***** compose the SOAP security header")
     # add WSSE
@@ -35,9 +36,9 @@ def send_email(xml):
     getTerminalsDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
 
     print("***** SOAP request is:")
-    print getTerminalsDetailsRequest
+    #print getTerminalsDetailsRequest
 
-    getTerminalsDetailsResponse = clientService.terminal.GetTerminalsDetails(**getTerminalsDetailsRequest)
+    getTerminalsDetailsResponse = clientService.service.GetTerminalDetails(**getTerminalsDetailsRequest)
 
     print("***** SOAP response is:")
     print(getTerminalsByImsiResponse)
