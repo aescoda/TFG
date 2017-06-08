@@ -4,5 +4,6 @@ requests-toolbelt
 six
 certifi
 python-dateutil
+suds
 
 
