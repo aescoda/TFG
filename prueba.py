@@ -37,7 +37,7 @@ def send_email(xml):
     print("***** SOAP request is:")
     print getTerminalsDetailsRequest
 
-    getTerminalsDetailsResponse = clientService.service.GetTerminalsDetails(**getTerminalsDetailsRequest)
+    getTerminalsDetailsResponse = clientService.terminal.GetTerminalsDetails(**getTerminalsDetailsRequest)
 
     print("***** SOAP response is:")
     print(getTerminalsByImsiResponse)
