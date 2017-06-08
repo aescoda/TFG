@@ -32,7 +32,7 @@ def send_email(xml):
 
     print("***** compose the SOAP body")
     #define imsi as a complext type
-    iccid = "89302720396916796910"
+    iccid =  dict(iccid = '89302720396916796910')
     getTerminalsDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
 
     print("***** SOAP request is:")
