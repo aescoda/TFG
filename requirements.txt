@@ -1,9 +1,7 @@
 Flask==0.10.1
+email_lib
+jasper_lib
 requests
-requests-toolbelt
-six
-certifi
-python-dateutil
 suds
 
 
