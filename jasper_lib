@@ -1,4 +1,7 @@
-
+#Jaspr_functions
+import os
+from suds.client import Client
+from suds.wsse import Security,UsernameToken
 
 
 
