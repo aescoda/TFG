@@ -1,11 +1,8 @@
 from flask import Flask
 from flask import request
-from flask import make_response #Este no se si lo necesito
-import os
 import xml.etree.ElementTree as ET
 from threading import Thread
-from suds.client import Client
-from suds.wsse import Security,UsernameToken
+
 
 
 app = Flask(__name__)
