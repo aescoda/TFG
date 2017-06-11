@@ -32,6 +32,7 @@ def get_admin(iccid):
 
     print("***** SOAP response is:")
     print(getTerminalsByImsiResponse)
+    #SACAR ADMIN Y NOMBRE SI SE PUEDE Y DEVOLVER COMO ARRAY
     admin = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
     return admin
     
