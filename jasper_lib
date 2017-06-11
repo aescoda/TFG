@@ -1,9 +1,8 @@
-#Jasper_functions
 import os
 from suds.client import Client
 from suds.wsse import Security,UsernameToken
 
-#service = 'terminal'
+
 wsdlurl= os.environ.get('WSDL_FILE', None)
 username= os.environ.get('USER_NAME', None)
 password= os.environ.get('USER_PASS', None)
@@ -12,7 +11,7 @@ license_key= os.environ.get('LICENSE_KEY', None)
 
 print("***** create the SOAP client")
 clientService = Client(wsdlurl)
-#print clientService
+
 
 print("***** compose the SOAP security header")
 # add WSSE
@@ -23,8 +22,7 @@ clientService.set_options(wsse=security)
 
 def get_admin(iccid):
     print("***** compose the SOAP body")
-    #define imsi as a complext type
-    iccid =  dict(iccid = '89302720396916796910')
+    #define iccid as a complext type
     getTerminalsDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
 
     print("***** SOAP request is:")
@@ -34,54 +32,51 @@ def get_admin(iccid):
 
     print("***** SOAP response is:")
     print(getTerminalsByImsiResponse)
-    iccid = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
-    return iccid
+    admin = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
+    return admin
     
-def get_email (admin)
+def get_email (accountid)
     print("***** compose the SOAP body")
     #define imsi as a complext type
-    iccid =  dict(iccid = '89302720396916796910')
-    getTerminalsDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
+    getAccountDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, accountids=long(accountid))
 
     print("***** SOAP request is:")
     #print getTerminalsDetailsRequest
 
-    getTerminalsDetailsResponse = clientService.service.GetTerminalDetails(**getTerminalsDetailsRequest)
+    getAccountDetailsResponse = clientService.service.GetAccountDetails(**getAccountDetailsRequest)
 
     print("***** SOAP response is:")
     print(getTerminalsByImsiResponse)
-    iccid = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
+    email = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
     return email
     
-def deactivate_SIM(iccid):
+def deactivate_SIM(iccid, cust, date):
     print("***** compose the SOAP body")
-    #define imsi as a complext type
-    iccid =  dict(iccid = '89302720396916796910')
-    getTerminalsDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
-
-    print("***** SOAP request is:")
-    #print getTerminalsDetailsRequest
-
-    getTerminalsDetailsResponse = clientService.service.GetTerminalDetails(**getTerminalsDetailsRequest)
-
-    print("***** SOAP response is:")
-    print(getTerminalsByImsiResponse)
-    iccid = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
-    return iccid
     
-def get_location():
-    print("***** compose the SOAP body")
-    #define imsi as a complext type
-    iccid =  dict(iccid = '89302720396916796910')
-    getTerminalsDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
+    deactivateSIMRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, strSIM=iccid, strCustPrefix=cust,  strDeactivationDate=date)
 
     print("***** SOAP request is:")
     #print getTerminalsDetailsRequest
 
-    getTerminalsDetailsResponse = clientService.service.GetTerminalDetails(**getTerminalsDetailsRequest)
+     deactivateSIMResponse = clientService.service.GetTerminalDetails(**getTerminalsDetailsRequest)
 
     print("***** SOAP response is:")
     print(getTerminalsByImsiResponse)
     iccid = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
-    return iccid
+    return None
+    
+def get_location(iccid):
+    print("***** compose the SOAP body")
+    #define imsi as a complext type
+    getLocationRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
+
+    print("***** SOAP request is:")
+    #print getTerminalsDetailsRequest
+
+    getLocationResponse = clientService.service.GetLocation(**getLocationRequest)
+
+    print("***** SOAP response is:")
+    print(getTerminalsByImsiResponse)
+    location = [(getLocationResponse.terminals.location.longitude),(getLocationResponse.terminals.location.latitude)
+    return location
 
