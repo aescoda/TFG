@@ -2,25 +2,16 @@
 from email.mime.text import MIMEText
 from smtplib import SMTP
 
-sender_email = "migsepulcre@gmail.com"
-sender_pass = 
-server_email = 
-port_email =
-SSL_email =     
+sender_email = os.environ.get('MAIL_USER', None)
+sender_pass = os.environ.get('MAIL_PASS', None)
+server_email = os.environ.get('MAIL_SERVER', None)
+port_email = os.environ.get('MAIL_PORT', None)
+SSL_email = os.environ.get('MAIL_SSL', None)   
 
 
 
-def email_alert(recipient):
-    message = "<P>Hola %s,</P>
-    <P>Se ha detectado una alerta de seguridad de cambio de IMEI en la SIM con iccid = %s. 
-    Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje.
-    De lo contrario por favor hago acceda al siguiente link para localizar su SIM y desactivarla </P><br>
-
-    <a href="https://jasper-alert.herokuapp.com/response"> Localizar y desactivar SIM </a><br><br>
-
-    Muchas gracias,<br><br>
-
-    Equipo de Cisco Jasper<br>"
+def email_alert(recipient, iccid, customer):
+    message = "<br>Hola %s,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI en la SIM con iccid = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (customer, iccid)
     message = MIMEText(message, "html", "uft-8")
     message["From"] = sender_email
     message["To"] = recipient
@@ -33,11 +24,30 @@ def email_alert(recipient):
     print "Concectado a Gmail"
     #
     smtp.login(sender_email, sender_pass)
-    smtp.sendmail(sender_email, to_address, message)
+    smtp.sendmail(sender_email, recipient, message)
     smtp.quit()
     print "fin"
-    return "Hello"
+    return "Mensaje enviado"
+
+def email_action (recipient, customer, coordenadas, iccid)
+    message = "<br>Hola %s,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI en la SIM con iccid = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (customer, iccid)
+    message = MIMEText(message, "html", "uft-8")
+    message["From"] = sender_email
+    message["To"] = recipient
+    message["Subject"] = "Alert responsed"
+    smtp = SMTP(server_email, port_email)
+    smtp.ehlo()
+    smtp.starttls()
+    smtp.ehlo()
+    print "Conexion exitosa con Gmail"
+    print "Concectado a Gmail"
+    #
+    smtp.login(sender_email, sender_pass)
+    smtp.sendmail(sender_email, recipient, message)
+    smtp.quit()
+    print "fin"
+    return "Mensaje enviado"
 
 
-<img = 
+
 
