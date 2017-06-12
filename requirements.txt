@@ -1,6 +1,9 @@
 Flask==0.10.1
-os
 requests
 suds
-
+smartsheet-python-sdk
+six
+certifi
+python-dateutil
+apiai
 
