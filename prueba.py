@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 def send_email(xml):
     print "2"
+    prueba()
     print xml
     return None
     
