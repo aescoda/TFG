@@ -29,7 +29,7 @@ def webhook():
     
     
 app.route('/response', methods=['POST','GET'])
-def response:
+def response():
     print xml #Comprobar como comparto la variable.
     return "Acabamos de procesar su petición, en breve recibirá un email con los detalles"
     
