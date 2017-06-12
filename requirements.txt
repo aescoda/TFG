@@ -1,6 +1,6 @@
 Flask==0.10.1
-email_lib
-jasper_lib
+email_lib.py
+jasper_lib.py
 requests
 suds
 
