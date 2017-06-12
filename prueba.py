@@ -9,7 +9,7 @@ import email_lib
 
 app = Flask(__name__)
 
-
+xml =""
 
 def send_email(xml):
     print "2"
