@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 def send_email(xml):
     print "2"
-    prueba()
+    email_lib.prueba()
     print xml
     return None
     
