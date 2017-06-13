@@ -18,6 +18,7 @@ from flask import Flask
 from flask import request
 import xml.etree.ElementTree as ET
 from threading import Thread
+import geocoder
 
 #Private libraries create for the app development
 import email_lib
@@ -67,11 +68,12 @@ def alert():
 def response:
     #We get the location of the SIM card with the Jasper function
     location = jasper_lib.get_location(iccid)
-    #Como conseguimos la fecha y hora actual
     #We deactivate the SIM card as we already have the location
-    jasper_lib.deactivateSIM(iccid, admin_details[2], actual_date)
+    jasper_lib.deactivateSIM(iccid)
+    #We find the exact location of the SIM with a library created by google to get location information in JSON
+    address = geocoder.google(location, method='reverse')
     #We send an email to the customer with the location of the SIM card 
-    email_lib.email_action(customer_email,admin_details[1],location,iccid)
+    email_lib.email_action(customer_email,admin_details[1],location,iccid,address)
     return "Acabamos de procesar su petición, en breve recibirá un email con los detalles"
     
 # App is listening to webhooks. Next line is used to executed code only if it is
