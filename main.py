@@ -27,42 +27,55 @@ import jasper_lib
 #We use a Flask app as a global layout
 app = Flask(__name__)
 
+#We declare this variables as global so we can use it in both webhooks
+iccid = ""
+admin_details = 
+customer_email =""
+
 #We define a thread that will run after receiving the notification from Jasper into the /webhook listener. We need to create this
 #thread as Jasper will resend the notification unless it receives a 'status 200' HTTPS message
 def send_email(xml):
+    #We mark this variables as global so the assigments done to them in this threat will affect variable used in the /response webhook
+    global iccid
+    global customer_email
+    global admin_details
     #Here we parse the data receive as a unicode into a elementtree object to process it as XML file and get the iccid affected
-    data = ET.fromstring(xml)
+    xml = ET.fromstring(xml)
     iccid = req[0]
-    #All the details needed for the first notification will be obteined through these functions
+    #All the details needed for the first email notification will be obteined through these functions
     admin_details = jasper_lib.get_admin(iccid)
     customer_email = jasper_lib.get_email(admin_details[0])
+    #We create and send an email to the customer affected
     email_lib.email_alert(customer_email,iccid, admin_details[1])
     return None
     
 
-#
-@app.route('/webhook', methods=['POST','GET'])
-def webhook():
-    #Jasper alerts will be sent receive in this webhook. We will extract the data to use it for the application communications as unicode
+#Jasper alerts will be sent receive in this webhook.
+@app.route('/alert', methods=['POST','GET'])
+def alert():
+    #We will extract the data to use it for the application communications as unicode
     req = request.form
-    xml = req['data']  
+    data = req['data']  
     #We open a new thread to process the xml data receive as we need to answer Jasper to stop receiving messages
-    t = Thread(target=send_email, args=(xml,))
+    t = Thread(target=send_email, args=(data,))
     t.start()
     #Jasper will resend the notification unless it receives a status 200 confirming the reception
     return '',200
     
-    
+#If we are facing a real unauthorized IMEI change we will receive the confirmation from the customer in this webhook.
 @app.route('/response', methods=['POST','GET'])
 def response:
-    print xml #Comprobar como comparto la variable.
+    #We get the location of the SIM card with the Jasper function
     location = jasper_lib.get_location(iccid)
     #Como conseguimos la fecha y hora actual
+    #We deactivate the SIM card as we already have the location
     jasper_lib.deactivateSIM(iccid, admin_details[2], actual_date)
+    #We send an email to the customer with the location of the SIM card 
     email_lib.email_action(customer_email,admin_details[1],location,iccid)
     return "Acabamos de procesar su petición, en breve recibirá un email con los detalles"
     
-   
+# App is listening to webhooks. Next line is used to executed code only if it is
+# running as a script, and not as a module of another script.
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     app.run(debug=True, port=port, host='0.0.0.0', threaded=True)
