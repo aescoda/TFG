@@ -39,11 +39,11 @@ def email_alert(recipient, iccid, customer):
 #This function is used to send the location and iccid of the SIM card that has been changed.
 def email_action (recipient, customer, coordenadas, iccid):
      #We create the email for customer's name, iccid and location of the SIM card
-    message = "<br>Hola %s,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI en la SIM con iccid = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (customer, iccid)
+    message = "<br>Hola %s,<br><br> Tras tu confirmación de que ha habido un acceso no autorizado a la SIM con iccid = %s hemos procedido a su localización y desactivación. <br><br> Su ultima posicion antes de la desactivacion era %s, en las coordenadas exactas de %s, %s <br><br> Rogamos se ponga en contacto con el equipo de Jasper para investigar en profundidad el problema<br><br>   Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (customer, iccid, direccion, lon, lat)
     message = MIMEText(message, "html", "uft-8")
     message["From"] = sender_email
     message["To"] = recipient
-    message["Subject"] = "Alert responsed"
+    message["Subject"] = "Alert responded"
     #We try to make the conection with the SMTP server
     smtp = SMTP(server_email, port_email)
     smtp.ehlo()
