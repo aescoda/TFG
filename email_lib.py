@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 ##This file contains functions to interact with the customer with email in the main.py file##
@@ -6,7 +7,7 @@ from email.mime.text import MIMEText
 from smtplib import SMTP
 import os
 
-#For security reasons we storage all the private information in Heroku server as system variables. We will read them for using them 
+#For security reasons we storage all the private information in Heroku server as system variables. We will read them for functions 
 sender_email = os.environ.get('MAIL_USER', None)
 sender_pass = os.environ.get('MAIL_PASS', None)
 server_email = os.environ.get('MAIL_SERVER', None)
