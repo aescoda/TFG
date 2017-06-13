@@ -15,6 +15,7 @@ def send_email(xml):
     print "2"
     email_lib.prueba()
     print xml
+    email_lib.email_alert(customer_email,iccid, admin_details[1])
     return None
     
 @app.route('/webhook', methods=['POST','GET'])
