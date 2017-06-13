@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 ##This file contains functions to interact with the customer with email in the main.py file##
-
+import geocode
 from email.mime.text import MIMEText
 from smtplib import SMTP
 import os
