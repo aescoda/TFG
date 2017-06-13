@@ -1,5 +1,9 @@
 Flask==0.10.1
-requests
-suds
+os
+threading
+xml
 geocode
+email
+smtplib
+suds
 
