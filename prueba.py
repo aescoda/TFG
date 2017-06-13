@@ -9,8 +9,7 @@ import email_lib
 
 app = Flask(__name__)
 
-
-global xml = ""
+xml = ""
 
 def send_email(xml):
     print "2"
@@ -21,7 +20,8 @@ def send_email(xml):
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
     print "webhook"
-    global xml = "hola"    
+    global xml
+    xml = "hola"    
     t = Thread(target=send_email, args=(xml,))
     t.start()
     print "acabando"
