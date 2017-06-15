@@ -12,7 +12,7 @@ app = Flask(__name__)
 xml = ""
 
 def send_email(xml):
-        return None
+    return None
     
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
