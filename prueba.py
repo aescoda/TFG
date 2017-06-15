@@ -24,7 +24,7 @@ def webhook():
     t = Thread(target=send_email, args=(data,))
     t.start()
     #Jasper will resend the notification unless it receives a status 200 confirming the reception
-return '',200
+    return '',200
     
     
 @app.route('/response', methods=['POST','GET'])
