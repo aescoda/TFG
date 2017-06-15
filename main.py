@@ -40,14 +40,17 @@ def send_email(xml):
     global iccid
     global customer_email
     global admin_details
+    global event
     #Here we parse the data receive as a unicode into a elementtree object to process it as XML file and get the iccid affected
+    event = req['eventType']
+    data = req['data'] 
     xml = ET.fromstring(xml)
     iccid = req[0]
     #All the details needed for the first email notification will be obteined through these functions
     admin_details = jasper_lib.Terminals.get_account(iccid)
     customer_email = jasper_lib.Accounts.get_email(admin_details[0])
     #We create and send an email to the customer affected
-    email_lib.email_alert(customer_email,iccid, admin_details[1])
+    email_lib.email_alert(customer_email,iccid, admin_details[1],event)
     return None
     
 
@@ -56,9 +59,8 @@ def send_email(xml):
 def alert():
     #We will extract the data to use it for the application communications as unicode
     req = request.form
-    data = req['data']  
     #We open a new thread to process the xml data receive as we need to answer Jasper to stop receiving messages
-    t = Thread(target=send_email, args=(data,))
+    t = Thread(target=send_email, args=(req,))
     t.start()
     #Jasper will resend the notification unless it receives a status 200 confirming the reception
     return '',200
