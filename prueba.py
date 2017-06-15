@@ -18,7 +18,9 @@ def send_email(xml):
 def alert():
     #We will extract the data to use it for the application communications as unicode
     req = request.form
-    print req
+    event = req['eventType']
+    print event
+    print type(event)
     data = req['data']  
     #We open a new thread to process the xml data receive as we need to answer Jasper to stop receiving messages
     t = Thread(target=send_email, args=(data,))
