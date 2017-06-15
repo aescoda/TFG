@@ -14,8 +14,8 @@ xml = ""
 def send_email(xml):
     return None
     
-@app.route('/webhook', methods=['POST','GET'])
-def webhook():
+@app.route('/alert', methods=['POST','GET'])
+def alert():
     #We will extract the data to use it for the application communications as unicode
     req = request.form
     print req
