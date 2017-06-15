@@ -20,7 +20,10 @@ def alert():
     req = request.form
     event = req['eventType']
     print event
-    if event == "SIM_STATE_CHANGE"
+    if event == "SIM_STATE_CHANGE":
+        print "va"
+    else:
+        print "nova"
     print type(event)
     data = req['data']  
     #We open a new thread to process the xml data receive as we need to answer Jasper to stop receiving messages
