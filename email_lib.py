@@ -19,18 +19,23 @@ def email_alert(recipient, iccid, customer,event):
     #We create the email for customer's name and iccid
     if event == "SIM_STATE_CHANGE":
         message = 
+        subject = "SIM state change alert"
     elif event == "IMEI_CHANGE":
         message = "<br>Hola %s,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI en la SIM con iccid = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (customer, iccid)
+        subject = "IMEI change alert"
     elif event == "DATA_LIMIT"
         message = 
+        subject = "Data limit achived"
     elif event == "PAST24H_SESSION_USAGE_LESSTHAN"
-        message = 
+        message =
+        subject = "Session usage alert"
     else
         message = ""
+        subject = ""
     body = MIMEText(message, "html", "uft-8")
     body["From"] = sender_email
     body["To"] = recipient
-    body["Subject"] = "IMEI change alert"
+    body["Subject"] = subject
     #We try to make the conection with the SMTP server
     smtp = SMTP(server_email, port_email)
     smtp.ehlo()
