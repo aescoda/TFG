@@ -12,22 +12,19 @@ app = Flask(__name__)
 xml = ""
 
 def send_email(xml):
-    print "2"
-    email_lib.prueba()
-    print xml
-    email_lib.email_alert(customer_email,iccid, admin_details[1])
-    return None
+        return None
     
 @app.route('/webhook', methods=['POST','GET'])
 def webhook():
-    print "webhook"
-    global xml
-    xml = "hola"    
-    t = Thread(target=send_email, args=(xml,))
+    #We will extract the data to use it for the application communications as unicode
+    req = request.form
+    print req
+    data = req['data']  
+    #We open a new thread to process the xml data receive as we need to answer Jasper to stop receiving messages
+    t = Thread(target=send_email, args=(data,))
     t.start()
-    print "acabando"
-    #Jasper resend the notification unless it receives a status 200 confirming the reception
-    return '',200
+    #Jasper will resend the notification unless it receives a status 200 confirming the reception
+return '',200
     
     
 @app.route('/response', methods=['POST','GET'])
