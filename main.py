@@ -69,14 +69,21 @@ def alert():
 @app.route('/response', methods=['POST','GET'])
 def response:
     
+    
+    elif event == "IMEI_CHANGE":
     #We get the location of the SIM card with the Jasper function
     location = jasper_lib.Terminals.get_location(iccid)
     #We deactivate the SIM card as we already have the location
     jasper_lib.Termianls.deactivateSIM(iccid)
     #We find the exact location of the SIM with a library created by google to get location information in JSON
     address = geocoder.google(location, method='reverse')
-    #We send an email to the customer with the location of the SIM card 
-    email_lib.email_action(customer_email,admin_details[1],location,iccid,address)
+    
+    
+    
+    
+    
+    #We send an email to the customer with the location of the SIM card    
+    email_lib.email_action(customer_email[0],customer_email[1],data)
     return "Acabamos de procesar su petición, en breve recibirá un email con los detalles"
     
 # App is listening to webhooks. Next line is used to executed code only if it is
