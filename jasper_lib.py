@@ -89,7 +89,22 @@ def Accounts():
 
         #We parse the SOAP response to find the value we need of the SIM card and return it
         email = getAccountDetailsResponse.accounts.account.billing.contact.email
-        name = getAccountDetailsResponse.accounts.account.billing.contact.name
-        contact_info = [email, name]
-        return contact_info
+        return email
+                    
+def Billing():
+    wsdlurl= os.environ.get('WSDL_FILE', None)
+    username= os.environ.get('USER_NAME', None)
+    password= os.environ.get('USER_PASS', None)
+    license_key= os.environ.get('LICENSE_KEY', None)
 
+    #We need to create a SOAP client to make a communication with Cisco Jasper API server using the wsdlurl file that contains the functions
+    clientService = Client(wsdlurl)
+
+    #We add a security header to the SOAP messages for web services with the username and password for the Jasper Control Center
+    security = Security()
+    token = UsernameToken(username, password)
+    security.tokens.append(token)
+    clientService.set_options(wsse=security)
+    
+    def get_usage(                
+      
