@@ -48,9 +48,9 @@ def send_email(xml):
     iccid = req[0]
     #All the details needed for the first email notification will be obteined through these functions
     admin_details = jasper_lib.Terminals.get_account(iccid)
-    customer_email = jasper_lib.Accounts.get_email(admin_details[0])
+    customer_email = jasper_lib.Accounts.get_email(admin_details)
     #We create and send an email to the customer affected
-    email_lib.email_alert(customer_email,iccid, admin_details[1],event)
+    email_lib.email_alert(customer_email[0],iccid, customer_email[1],event)
     return None
     
 
@@ -68,6 +68,7 @@ def alert():
 #If we are facing a real unauthorized IMEI change we will receive the confirmation from the customer in this webhook.
 @app.route('/response', methods=['POST','GET'])
 def response:
+    
     #We get the location of the SIM card with the Jasper function
     location = jasper_lib.Terminals.get_location(iccid)
     #We deactivate the SIM card as we already have the location
