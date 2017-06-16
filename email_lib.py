@@ -24,10 +24,10 @@ def email_alert(recipient, iccid, event):
         message = "<br>Estimado usuario,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI de su tarjeta SIM con numero de identificacion = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su tarjeta SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Atentamente,<br><br>    Equipo de Cisco Jasper<br>" % (iccid)
         subject = "Alerta cambio de IMEI"
     elif event == "DATA_LIMIT"
-        message =  "<br>Estimado usuario<br><br>, Se ha alcanzado el limite de datos disponibles en su contrato. Si desea contratar un paquete adicional, por favor, acceda al siguiente link: <br><br> Para obtener mas informacion del uso realizado de sus datos haga click aqui:<br><br>  <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center> 
+        message =  "<br>Estimado usuario,<br><br> Se ha alcanzado el limite de datos disponibles en su contrato. Si desea contratar un paquete adicional, por favor, acceda al siguiente link: <br><br> Para obtener mas informacion del uso realizado de sus datos haga click aqui:<br><br>  <center><a href='https://jasper-alert.herokuapp.com/response'> Uso de datos </a><br><br></center> 
         subject = "Alerta consumo de datos alcanzado"
     elif event == "CTD_SESSION_USAGE_EXCEEDED"
-        message = "Estimado usuario, Se han detectado un numero elevado numero de conexiones en esta tarjeta SIM, con numero de identificación = %s. Por favor, revise la alerta identificada con el equipo de seguridad de Cisco Jasper, Atentamente,<br><br>, Equipo de Cisco Jasper<br>" % (iccid)
+        message = "<br>Estimado usuario,<br><br> Se han detectado un numero elevado numero de conexiones en esta tarjeta SIM, con numero de identificación = %s.<br><br> Por favor, revise la alerta identificada con su equipo de seguridad de Cisco Jasper, Atentamente,<br><br>, Equipo de Cisco Jasper<br>" % (iccid)
         subject = "Alerta de conexiones"
     else
         message = ""
