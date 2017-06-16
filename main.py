@@ -73,12 +73,13 @@ def alert():
 def response:
     
     if event == "SIM_STATE_CHANGE":
-    #cambiar el evento de nuevo
+    jasper_lib.Terminals.reactivateSIM(iccid)
+    data = iccid
     elif event == "IMEI_CHANGE":
     #We get the location of the SIM card with the Jasper function
     location = jasper_lib.Terminals.get_location(iccid)
     #We deactivate the SIM card as we already have the location
-    jasper_lib.Termianls.deactivateSIM(iccid)
+    jasper_lib.Terminals.deactivateSIM(iccid)
     #We find the exact location of the SIM with a library created by google to get location information in JSON
     address = geocoder.google(location, method='reverse')
     #We 
