@@ -15,18 +15,18 @@ port_email = os.environ.get('MAIL_PORT', None)
 SSL_email = os.environ.get('MAIL_SSL', None)   
 
 #This funcion is used to send an email notification to the customer and check if the IMEI change was unauthorized.
-def email_alert(recipient, iccid, customer,event):
+def email_alert(recipient, iccid, event):
     #We create the email for customer's name and iccid
     if event == "SIM_STATE_CHANGE":
-        message = "<br>Estimado usuario,<br><br> Se ha detectado una cambio de estado de su tarjeta SIM con numero de identificacion = %s<br><br> Si este cambio ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para reactivar su tarjeta SIM: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Reactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br> % (customer, iccid, address, location[0],location[1])
+        message = "<br>Estimado usuario,<br><br> Se ha detectado una cambio de estado de su tarjeta SIM con numero de identificacion = %s<br><br> Si este cambio ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para reactivar su tarjeta SIM: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Reactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br> % (iccid, address, location[0],location[1])
         subject = "SIM state change alert"
     elif event == "IMEI_CHANGE":
-        message = "<br>Estimado usuario,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI de su tarjeta SIM con numero de identificacion = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su tarjeta SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (customer, iccid)
+        message = "<br>Estimado usuario,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI de su tarjeta SIM con numero de identificacion = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su tarjeta SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (iccid)
         subject = "IMEI change alert"
     elif event == "DATA_LIMIT"
         message =  "Estimado usuario, Se ha alcanzado el limite de datos contratados en su contrato. Si desea contratar un paquete adicional, por favor, acceda al siguiente link: 
         subject = "Data limit achived"
-    elif event == "PAST24H_SESSION_USAGE_LESSTHAN"
+    elif event == "CTD_SESSION_USAGE_EXCEEDED"
         message = "Estimado usuario, Se han detectado un numero elevado numero de conexiones en esta tarjeta SIM, con numero de identificación = %s. Por favor, revise la alerta identificada con el equipo de seguridad de Cisco Jasper, Atentament
         subject = "Session usage alert"
     else
@@ -48,7 +48,7 @@ def email_alert(recipient, iccid, customer,event):
     return "Mensaje enviado"
 
 #This function is used to send the location and iccid of the SIM card that has been changed.
-def email_action (recipient, customer, data):
+def email_action (recipient, data):
     #We create the email for customer's name, iccid and location of the SIM card
     if event == "SIM_STATE_CHANGE":
         message = 
@@ -59,7 +59,7 @@ def email_action (recipient, customer, data):
     elif event == "DATA_LIMIT"
         message = 
         subject = "Data limit achived"
-    elif event == "PAST24H_SESSION_USAGE_LESSTHAN"
+    elif event == "CTD_SESSION_USAGE_EXCEEDED"
         message = "Estimado usuario, 
         subject = "Session usage alert"
     else
