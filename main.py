@@ -32,6 +32,8 @@ app = Flask(__name__)
 iccid = ""
 admin_details = 
 customer_email =""
+event = ""
+xml = ""
 
 #We define a thread that will run after receiving the notification from Jasper into the /webhook listener. We need to create this
 #thread as Jasper will resend the notification unless it receives a 'status 200' HTTPS message
@@ -41,6 +43,7 @@ def send_email(xml):
     global customer_email
     global admin_details
     global event
+    global xml
     #Here we parse the data receive as a unicode into a elementtree object to process it as XML file and get the iccid affected
     event = req['eventType']
     data = req['data'] 
@@ -50,7 +53,7 @@ def send_email(xml):
     admin_details = jasper_lib.Terminals.get_account(iccid)
     customer_email = jasper_lib.Accounts.get_email(admin_details)
     #We create and send an email to the customer affected
-    email_lib.email_alert(customer_email[0],iccid, customer_email[1],event)
+    email_lib.email_alert(customer_email, iccid,event)
     return None
     
 
@@ -69,7 +72,8 @@ def alert():
 @app.route('/response', methods=['POST','GET'])
 def response:
     
-    
+    if event == "SIM_STATE_CHANGE":
+    #cambiar el evento de nuevo
     elif event == "IMEI_CHANGE":
     #We get the location of the SIM card with the Jasper function
     location = jasper_lib.Terminals.get_location(iccid)
@@ -77,13 +81,18 @@ def response:
     jasper_lib.Termianls.deactivateSIM(iccid)
     #We find the exact location of the SIM with a library created by google to get location information in JSON
     address = geocoder.google(location, method='reverse')
+    #We 
+    data = [location[0],location[1],iccid,address]
     
-    
-    
-    
-    
+    elif event == "DATA_LIMIT"
+    #Comprar o más detalles con getterminalusage    
+    elif event == "CTD_SESSION_USAGE_EXCEEDED"
+    #    
+    else
+        return None   
+      
     #We send an email to the customer with the location of the SIM card    
-    email_lib.email_action(customer_email[0],customer_email[1],data)
+    email_lib.email_action(customer_email,data)
     return "Acabamos de procesar su petición, en breve recibirá un email con los detalles"
     
 # App is listening to webhooks. Next line is used to executed code only if it is
