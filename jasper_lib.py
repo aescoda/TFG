@@ -42,11 +42,17 @@ def Terminals():
       
     def deactivate_SIM(iccid):
         #We compose the SOAP body for the EditTerminalRequest with the accountid we get from the previous function
-        EditTerminalRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid, targetValue=, changeType)
-
+        EditTerminalRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid, targetValue="DEACTIVATED_NAME", changeType="3")
         #We send to Jasper our SOAP request with the function in the WSDL file EditTerminal and get the response in a variable    
-        EditTerminalResponse = clientService.service.EditTerminalDetails(**getTerminalsDetailsRequest)
-
+        EditTerminalResponse = clientService.service.EditTerminalDetails(**EditTerminalRequest)
+        #As this PULL request is for deactivate the SIM we return None
+        return None
+    
+    def reactivate_SIM(iccid):
+        #We compose the SOAP body for the EditTerminalRequest with the accountid we get from the previous function
+        EditTerminalRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid, targetValue="ACTIVATED_NAME", changeType="3")
+        #We send to Jasper our SOAP request with the function in the WSDL file EditTerminal and get the response in a variable    
+        EditTerminalResponse = clientService.service.EditTerminalDetails(**EditTerminalRequest)
         #As this PULL request is for deactivate the SIM we return None
         return None
 
