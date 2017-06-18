@@ -67,8 +67,8 @@ def Terminals():
         location = [(getLocationResponse.terminals.location.longitude),(getLocationResponse.terminals.location.latitude)
         #This function has been implemented by a 3rd party company and it is only for its use. For continue the developing of the project  
         #we will simulate the coordinates of the SIM card.  
-        return location
-return None                    
+        return location[0], location[1]
+    return None                    
 
 def Accounts():
     wsdlurl= os.environ.get('WSDL_FILE2', None)
@@ -96,9 +96,10 @@ def Accounts():
         #We parse the SOAP response to find the value we need of the SIM card and return it
         email = getAccountDetailsResponse.accounts.account.billing.contact.email
         return email
+    return None                  
                     
 def Billing():
-    wsdlurl= os.environ.get('WSDL_FILE', None)
+    wsdlurl= os.environ.get('WSDL_FILE3', None)
     username= os.environ.get('USER_NAME', None)
     password= os.environ.get('USER_PASS', None)
     license_key= os.environ.get('LICENSE_KEY', None)
@@ -112,5 +113,17 @@ def Billing():
     security.tokens.append(token)
     clientService.set_options(wsse=security)
     
-    def get_usage(                
-      
+    def get_usage(iccid):
+        #We compose the SOAP body for the getAccountDetailsRequest with the accountid we get from the previous function
+        getUsageRequest = dict(messageId="1001", version="1.0", licenseKey=license_key, iccid=iccid)
+
+        #We send to Jasper our SOAP request with the function in the WSDL file GetTerminalDetails and get the response in a variable
+        getUsageResponse = clientService.service.GetTerminalUsage(**getUsageRequest)
+
+        #We parse the SOAP response to find the value we need of the SIM card and return it
+        data_volume = getUsageResponse.totalDataVolume
+        start_date = getUsageResponse.cycleStartDate
+        SMS_volume = getUsageResponse.totalSMSVolume
+        Voice_volume = getUsageResponse.totalVoiceVolume            
+        return data_volume, start_date, SMS_volume, Voice_volume
+    return None      
