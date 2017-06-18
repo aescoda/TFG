@@ -52,7 +52,7 @@ def send_email(xml):
     #All the details needed for the first email notification will be obteined through these functions
     admin_details = jasper_lib.Terminals.get_account(iccid)
     customer_email = jasper_lib.Accounts.get_email(admin_details)
-    #We create and send an email to the customer affected
+    #We create and send an email to the customer affected depending on the alert 
     email_lib.email_alert(customer_email, iccid,event)
     return None
     
@@ -60,9 +60,9 @@ def send_email(xml):
 #Jasper alerts will be sent receive in this webhook.
 @app.route('/alert', methods=['POST','GET'])
 def alert():
-    #We will extract the data to use it for the application communications as unicode
+    #We will extract the body of the HTTPS POST to use it for the application communications
     req = request.form
-    #We open a new thread to process the xml data receive as we need to answer Jasper to stop receiving messages
+    #We open a new thread to process the data received as we need to answer Jasper to stop receiving messages
     t = Thread(target=send_email, args=(req,))
     t.start()
     #Jasper will resend the notification unless it receives a status 200 confirming the reception
@@ -71,8 +71,8 @@ def alert():
 #If we are facing a real unauthorized IMEI change we will receive the confirmation from the customer in this webhook.
 @app.route('/response', methods=['POST','GET'])
 def response:
-    
     if event == "SIM_STATE_CHANGE":
+    #We change the status of the SIM to activated again
     jasper_lib.Terminals.reactivateSIM(iccid)
     data = iccid
     elif event == "IMEI_CHANGE":
@@ -82,16 +82,15 @@ def response:
     jasper_lib.Terminals.deactivateSIM(iccid)
     #We find the exact location of the SIM with a library created by google to get location information in JSON
     address = geocoder.google(location, method='reverse')
-    #We 
-    data = [location[0],location[1],iccid,address]
-    
+    #We pack the data in an array to use it in the email
+    data = (location[0],location[1],iccid,address)
     elif event == "DATA_LIMIT"
-    #Comprar o más detalles con getterminalusage    
+    #We get the usage of the iccid  
+    usage = jasper_lib.Billing.get_usage(iccid)
+    data = usage
     elif event == "CTD_SESSION_USAGE_EXCEEDED"
-    #    
-    else
-        return None   
-      
+    #As we won't take action after the first email we don't need a second answer 
+    data = ""  
     #We send an email to the customer with the location of the SIM card    
     email_lib.email_action(customer_email,data)
     return "Acabamos de procesar su petición, en breve recibirá un email con los detalles"
