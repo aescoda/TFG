@@ -12,26 +12,23 @@ sender_email = os.environ.get('MAIL_USER', None)
 sender_pass = os.environ.get('MAIL_PASS', None)
 server_email = os.environ.get('MAIL_SERVER', None)
 port_email = os.environ.get('MAIL_PORT', None)
-SSL_email = os.environ.get('MAIL_SSL', None)   
+
 
 #This funcion is used to send an email notification to the customer and check if the IMEI change was unauthorized.
 def email_alert(recipient, iccid, event):
     #We create the email for customer's name and iccid
     if event == "SIM_STATE_CHANGE":
-        message = "<br>Estimado usuario,<br><br> Se ha detectado una cambio de estado de su tarjeta SIM con numero de identificacion = %s<br><br> Si este cambio ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para reactivar su tarjeta SIM: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Reactivar SIM </a><br><br></center>    Atentamente,<br><br>    Equipo de Cisco Jasper<br>" % (iccid)
+        message = "<br>Estimado usuario,<br><br> Se ha detectado una cambio de estado de su <b> tarjeta SIM con numero de identificacion = %s</b><br><br> Si este cambio ha sido voluntario, por favor, ignore este mensaje. De lo contrario, por favor acceda al siguiente link para reactivar su tarjeta SIM: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Reactivar SIM </a><br><br></center> Atentamente,<br><br> Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (iccid)
         subject = "Alerta desactivacion de SIM"
     elif event == "IMEI_CHANGE":
-        message = "<br>Estimado usuario,<br><br> Se ha detectado una alerta de seguridad de cambio de IMEI de su tarjeta SIM con numero de identificacion = %s<br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su tarjeta SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>    Atentamente,<br><br>    Equipo de Cisco Jasper<br>" % (iccid)
+        message = "<br>Estimado usuario,<br><br> Se ha detectado una <b>alerta de seguridad de cambio de IMEI de su tarjeta SIM con numero de identificacion = %s</b><br><br> Si este cambio de IMEI ha sido voluntario, por favor, ignore este mensaje. De lo contrario por favor hago acceda al siguiente link para localizar su tarjeta SIM y desactivarla: <br><br> <center><a href='https://jasper-alert.herokuapp.com/response'> Localizar y desactivar SIM </a><br><br></center>Atentamente,<br><br>Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (iccid)
         subject = "Alerta cambio de IMEI"
     elif event == "DATA_LIMIT"
-        message =  "<br>Estimado usuario,<br><br> Se ha alcanzado el limite de datos disponibles en su contrato. Si desea contratar un paquete adicional, por favor, acceda al siguiente link: <br><br> Para obtener mas informacion del uso realizado de sus datos haga click aqui:<br><br>  <center><a href='https://jasper-alert.herokuapp.com/response'> Uso de datos </a><br><br></center> 
+        message = "<br>Estimado usuario,<br><br> Se ha alcanzado el limite de datos disponibles en su contrato. Si desea contratar un paquete adicional, por favor, acceda al siguiente link: <br><br>   <left><a href='https://nj.jasperwireless.com/provision/ui/billing/rateplans/manage/details.html?detailFbRatePlanId=975801&popup=true'> Ampliar suscripcion </a><br><br></left>  Para obtener mas informacion del uso realizado de sus datos haga click aqui:<br><br>  <left><a href='https://jasper-alert.herokuapp.com/response'> Uso de datos </a><br><br></left> Atentamente,<br><br> Equipo de Cisco Jasper<br> <img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>"
         subject = "Alerta consumo de datos alcanzado"
     elif event == "CTD_SESSION_USAGE_EXCEEDED"
-        message = "<br>Estimado usuario,<br><br> Se han detectado un numero elevado numero de conexiones en esta tarjeta SIM, con numero de identificación = %s.<br><br> Por favor, revise la alerta identificada con su equipo de seguridad de Cisco Jasper, Atentamente,<br><br>, Equipo de Cisco Jasper<br>" % (iccid)
+        message = "<br>Estimado usuario,<br><br> Se han detectado un numero elevado numero de conexiones en la tarjeta SIM, con numero de identificación = %s.<br><br> Por favor, revise la alerta identificada con su equipo de seguridad de Cisco Jasper, Atentamente,<br><br>, Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (iccid)
         subject = "Alerta de conexiones"
-    else
-        message = ""
-        subject = ""
     #We create thebody with the message depending on the event
     body = MIMEText(message, "html", "uft-8")
     body["From"] = sender_email
@@ -52,17 +49,14 @@ def email_alert(recipient, iccid, event):
 def email_action (recipient, data):
     #We create the email for customer's name, iccid and location of the SIM card
     if event == "SIM_STATE_CHANGE":
-        message = 
-        subject = "SIM state change alert"
+        message = "<br>Estimado usuario,<br><br> Su tarjeta SIM con numero de identificación = %s ha sido reactivada<br><br> Atentamente,<br><br>    Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (data)
+        subject = "Tarjeta SIM reactivada correctamente"
     elif event == "IMEI_CHANGE":
-        message = "<br>Hola %s,<br><br> Tras su confirmacion de que ha habido un acceso no autorizado a la SIM con iccid = %s hemos procedido a su localizacion y desactivacion. <br><br> Su ultima posicion antes de la desactivacion era %s, en las coordenadas exactas de %s, %s <br><br> Rogamos se ponga en contacto con el equipo de Jasper para investigar en profundidad el problema<br><br>   Muchas gracias,<br><br>    Equipo de Cisco Jasper<br>" % (customer, data[2], data[3], data[0],data[1])
-        subject = "IMEI change alert"
+        message = "<br>Estimado usuario,<br><br> Tras su confirmacion de un acceso no autorizado a la SIM con iccid = %s hemos procedido a su localizacion y desactivacion. <br><br> La ultima posicion previa a la desactivacion era %s, en las coordenadas exactas de %s, %s <br><br> Rogamos se ponga en contacto con el equipo de seguridad de Jasper para investigar en detalle el evento ocurrido<br><br>   Atentamente,<br><br>    Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (data[3], data[2], data[0],data[1])
+        subject = "Localizacion y desactivacion exitosas"
     elif event == "DATA_LIMIT"
-        message = 
-        subject = "Data limit achived"
-    else
-        message = ""
-        subject = ""
+        message = "<br>Estimado usuario, Encuentre a continuacion los datos de consumo solicitados previamente: <br><br> Volmen de datos usados: %s <br><br> Fecha de incio: %s <br><br> Volmen de datos usados (SMS): %s <br><br> Volmen de datos usados (Voz): %s<br><br> Atentamente,<br><br>    Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (data[0], data[1], data[2], data[3])
+        subject = "Detalles de consumo"
     #We create thebody with the message depending on the event
     body = MIMEText(message, "html", "uft-8")
     body = MIMEText(message, "html", "uft-8")
