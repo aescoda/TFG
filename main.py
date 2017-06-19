@@ -35,6 +35,11 @@ customer_email =""
 event = ""
 xml = ""
 
+#We create the objects that we will use for the SOAP communications
+Terminals = jasper_lib.Terminals()
+Accounts = jasper_lib.Accounts()
+Billing = jasper_lib.Billing()
+
 #We define a thread that will run after receiving the notification from Jasper into the /webhook listener. We need to create this
 #thread as Jasper will resend the notification unless it receives a 'status 200' HTTPS message
 def send_email(xml):
@@ -50,8 +55,8 @@ def send_email(xml):
     xml = ET.fromstring(xml)
     iccid = req[0]
     #All the details needed for the first email notification will be obteined through these functions
-    admin_details = jasper_lib.Terminals.get_account(iccid)
-    customer_email = jasper_lib.Accounts.get_email(admin_details)
+    admin_details = Terminals.get_account(iccid)
+    customer_email = Accounts.get_email(admin_details)
     #We create and send an email to the customer affected depending on the alert 
     email_lib.email_alert(customer_email, iccid,event)
     return None
@@ -73,20 +78,20 @@ def alert():
 def response:
     if event == "SIM_STATE_CHANGE":
     #We change the status of the SIM to activated again
-    jasper_lib.Terminals.reactivateSIM(iccid)
+    Terminals.reactivateSIM(iccid)
     data = iccid
     elif event == "IMEI_CHANGE":
     #We get the location of the SIM card with the Jasper function
-    location = jasper_lib.Terminals.get_location(iccid)
+    location = Terminals.get_location(iccid)
     #We deactivate the SIM card as we already have the location
-    jasper_lib.Terminals.deactivateSIM(iccid)
+    Terminals.deactivateSIM(iccid)
     #We find the exact location of the SIM with a library created by google to get location information in JSON
     address = geocoder.google(location, method='reverse')
     #We pack the data in an array to use it in the email
     data = (location[0],location[1],iccid,address)
     elif event == "DATA_LIMIT":
     #We get the usage of the iccid  
-    usage = jasper_lib.Billing.get_usage(iccid)
+    usage = Billing.get_usage(iccid)
     data = usage
     elif event == "CTD_SESSION_USAGE_EXCEEDED":
     #As we won't take action after the first email we don't need a second answer 
