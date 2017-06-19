@@ -27,7 +27,7 @@ class Terminals():
         security.tokens.append(token)
         (self.clientService).set_options(wsse=security)
         
-    def prueba():
+    def prueba(self):
         print "Hola"
     
     ##This are all the funcionts that we use to communicate with Jasper and get the values of the SIM affected
