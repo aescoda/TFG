@@ -26,6 +26,10 @@ def Terminals():
     token = UsernameToken(username, password)
     security.tokens.append(token)
     clientService.set_options(wsse=security)
+    
+    def prueba():
+        print "hola"
+        return None
 
     ##This are all the funcionts that we use to communicate with Jasper and get the values of the SIM affected
     def get_account(iccid):
