@@ -4,7 +4,7 @@ import os
 import xml.etree.ElementTree as ET
 from threading import Thread
 import email_lib
-
+import jasper_lib
 
 
 app = Flask(__name__)
@@ -35,7 +35,7 @@ def alert():
     
 @app.route('/response', methods=['POST','GET'])
 def response():
-    print xml #Comprobar como comparto la variable.
+    Terminals.prueba() #Comprobar como comparto la variable.
     return "Acabamos de procesar su peticion, en breve recibira un email con los detalles"
     
    
