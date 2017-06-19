@@ -84,11 +84,11 @@ def response:
     address = geocoder.google(location, method='reverse')
     #We pack the data in an array to use it in the email
     data = (location[0],location[1],iccid,address)
-    elif event == "DATA_LIMIT"
+    elif event == "DATA_LIMIT":
     #We get the usage of the iccid  
     usage = jasper_lib.Billing.get_usage(iccid)
     data = usage
-    elif event == "CTD_SESSION_USAGE_EXCEEDED"
+    elif event == "CTD_SESSION_USAGE_EXCEEDED":
     #As we won't take action after the first email we don't need a second answer 
     data = ""  
     #We send an email to the customer with the location of the SIM card    
