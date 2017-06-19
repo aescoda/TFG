@@ -10,7 +10,7 @@ import jasper_lib
 app = Flask(__name__)
 
 xml = ""
-
+ ter = jasper_lib.Terminals()
 def send_email(xml):
     return None
     
@@ -35,7 +35,7 @@ def alert():
     
 @app.route('/response', methods=['POST','GET'])
 def response():
-    ter = jasper_lib.Terminals()
+   
     ter.prueba() #Comprobar como comparto la variable.
     return "Acabamos de procesar su peticion, en breve recibira un email con los detalles"
     
