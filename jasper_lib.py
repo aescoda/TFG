@@ -68,10 +68,11 @@ def Terminals():
         getLocationResponse = clientService.service.GetLocation(**getLocationRequest)
 
         #We parse the SOAP response to find the value we need of the SIM card and return it
-        location = [(getLocationResponse.terminals.location.longitude),(getLocationResponse.terminals.location.latitude)
+        longitude = getLocationResponse.terminals.location.longitude
+        latitude = getLocationResponse.terminals.location.latitude
         #This function has been implemented by a 3rd party company and it is only for its use. For continue the developing of the project  
         #we will simulate the coordinates of the SIM card.  
-        return location[0], location[1]
+        return longitude, latitude
     return None                    
 
 def Accounts():
