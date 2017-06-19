@@ -26,12 +26,9 @@ class Terminals():
         token = UsernameToken(username, password)
         security.tokens.append(token)
         (self.clientService).set_options(wsse=security)
-        
-    def prueba(self):
-        print "Hola"
-    
+         
     ##This are all the funcionts that we use to communicate with Jasper and get the values of the SIM affected
-    def get_account(iccid):
+    def get_account(self, iccid):
         #We compose the SOAP body for the getTerminalDetailsRequest with the iccid we want the details from as a dictionary  
         iccid = dict(iccid=iccid)
         getTerminalsDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=self.license_key, iccids=iccid)
@@ -43,7 +40,7 @@ class Terminals():
         accountid = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
         return accountid
       
-    def deactivate_SIM(iccid):
+    def deactivate_SIM(self,iccid):
         #We compose the SOAP body for the EditTerminalRequest with the accountid we get from the previous function
         EditTerminalRequest = dict(messageId="1001", version="1.0", licenseKey=self.license_key, iccid=iccid, targetValue="DEACTIVATED_NAME", changeType="3")
         #We send to Jasper our SOAP request with the function in the WSDL file EditTerminal and get the response in a variable    
@@ -51,7 +48,7 @@ class Terminals():
         #As this PULL request is for deactivate the SIM we return None
         return None
     
-    def reactivate_SIM(iccid):
+    def reactivate_SIM(self, iccid):
         #We compose the SOAP body for the EditTerminalRequest with the accountid we get from the previous function
         EditTerminalRequest = dict(messageId="1001", version="1.0", licenseKey=self.license_key, iccid=iccid, targetValue="ACTIVATED_NAME", changeType="3")
         #We send to Jasper our SOAP request with the function in the WSDL file EditTerminal and get the response in a variable    
@@ -59,7 +56,7 @@ class Terminals():
         #As this PULL request is for deactivate the SIM we return None
         return None
 
-    def get_location(iccid):
+    def get_location(self, iccid):
         #We compose the SOAP body for the GetLocationRequest with the accountid we get from the previous function
         getLocationRequest = dict(messageId="1001", version="1.0", licenseKey=self.license_key, iccid=iccid)
 
@@ -90,7 +87,7 @@ class Accounts:
         security.tokens.append(token)
         (self.clientService).set_options(wsse=security)                
      
-    def get_email (accountid):
+    def get_email (self, accountid):
         #We compose the SOAP body for the getAccountDetailsRequest with the accountid we get from the previous function
         accountid = dict(accountid = accountid)
         getAccountDetailsRequest = dict(messageId="1001", version="1.0", licenseKey=self.license_key, accountids=accountid)
@@ -119,7 +116,7 @@ class Billing():
         security.tokens.append(token)
         (self.clientService).set_options(wsse=security)
 
-    def get_usage(iccid):
+    def get_usage(self, iccid):
         #We compose the SOAP body for the getAccountDetailsRequest with the accountid we get from the previous function
         getUsageRequest = dict(messageId="1001", version="1.0", licenseKey=self.license_key, iccid=iccid)
 
