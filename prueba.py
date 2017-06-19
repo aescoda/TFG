@@ -35,7 +35,7 @@ def alert():
     
 @app.route('/response', methods=['POST','GET'])
 def response():
-    ter = Terminals()
+    ter = jasper_lib.Terminals()
     ter.prueba() #Comprobar como comparto la variable.
     return "Acabamos de procesar su peticion, en breve recibira un email con los detalles"
     
