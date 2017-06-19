@@ -10,7 +10,7 @@ import jasper_lib
 app = Flask(__name__)
 
 xml = ""
- ter = jasper_lib.Terminals()
+ter = jasper_lib.Terminals()
 def send_email(xml):
     return None
     
