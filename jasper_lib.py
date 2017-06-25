@@ -18,7 +18,8 @@ class Terminals():
         password= os.environ.get('USER_PASS', None)
         self.license_key= os.environ.get('LICENSE_KEY', None)
 
-        #We need to create a SOAP client to make a communication with Cisco Jasper API server using the wsdlurl file that contains the functions
+        #We need to create a SOAP client to make a communication with Cisco Jasper API server using the wsdlurl file that contains the
+        #functions
         self.clientService = Client(wsdlurl)
 
         #We add a security header to the SOAP messages for web services with the username and password for the Jasper Control Center
