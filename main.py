@@ -76,11 +76,6 @@ def alert():
 #If we are facing a real unauthorized IMEI change we will receive the confirmation from the customer in this webhook.
 @app.route('/response', methods=['POST','GET'])
 def response:
-    if event == "SIM_STATE_CHANGE":
-    #We change the status of the SIM to activated again
-    Terminals.reactivateSIM(iccid)
-    data = iccid
-    elif event == "IMEI_CHANGE":
     #We get the location of the SIM card with the Jasper function
     location = Terminals.get_location(iccid)
     #We deactivate the SIM card as we already have the location
@@ -89,14 +84,6 @@ def response:
     address = geocoder.google(location, method='reverse')
     #We pack the data in an array to use it in the email
     data = (location[0],location[1],iccid,address)
-    elif event == "DATA_LIMIT":
-    #We get the usage of the iccid  
-    usage = Billing.get_usage(iccid)
-    data = usage
-    elif event == "CTD_SESSION_USAGE_EXCEEDED":
-    #As we won't take action after the first email we don't need a second answer 
-    data = ""  
-    #We send an email to the customer with the location of the SIM card    
     email_lib.email_action(customer_email,data)
     return "Acabamos de procesar su petición, en breve recibirá un email con los detalles"
     
