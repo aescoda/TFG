@@ -3,7 +3,7 @@
 
 ##This file contains functions to interact with the customer with email in the main.py file##
 from email.mime.text import MIMEText
-from smtplib import SMTP
+from smtplib import SMTP_SSL
 import os
 
 #For security reasons we storage all the private information in Heroku server as system variables. We will read them for functions 
@@ -34,10 +34,7 @@ def email_alert(recipient, iccid, event):
     body["To"] = recipient
     body["Subject"] = subject
     #We try to make the conection with the SMTP server
-    smtp = SMTP(server_email, port_email)
-    smtp.ehlo()
-    smtp.starttls()
-    smtp.ehlo()
+    smtp = SMTP_SSL(server_email, port_email)
     #We introduce the credentials of the sender in the SMTP server and send the email.
     smtp.login(sender_email, sender_pass)
     smtp.sendmail(sender_email, recipient, body)
@@ -63,10 +60,7 @@ def email_action (recipient, data):
     body["To"] = recipient
     body["Subject"] = subject
     #We try to make the conection with the SMTP server
-    smtp = SMTP(server_email, port_email)
-    smtp.ehlo()
-    smtp.starttls()
-    smtp.ehlo()
+    smtp = SMTP_SSL(server_email, port_email)
     #We introduce the credentials of the sender in the SMTP server and send the email.
     smtp.login(sender_email, sender_pass)
     smtp.sendmail(sender_email, recipient, body)
