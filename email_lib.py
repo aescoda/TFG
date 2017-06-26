@@ -56,13 +56,21 @@ def email_alert(recipient, iccid, event):
 #This function is used to send the location and iccid of the SIM card that has been changed.
 def email_action (recipient, data):
     #We create the email for customer's name, iccid and location of the SIM card
-    message = "<br>Estimado usuario,<br><br> Tras su confirmacion de un acceso no autorizado a la SIM con iccid = %s hemos procedido a su localizacion y desactivacion. <br><br> La ultima posicion previa a la desactivacion era %s, en las coordenadas exactas de %s, %s <br><br> Rogamos se ponga en contacto con el equipo de seguridad de Jasper para investigar en detalle el evento ocurrido<br><br>   Atentamente,<br><br>    Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (data[3], data[2], data[0],data[1])
+    if event == "SIM_STATE_CHANGE":
+        message = "<br>Estimado usuario,<br><br> Su tarjeta SIM con numero de identificación = %s ha sido reactivada<br><br> Atentamente,<br><br>    Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (data)
+        subject = "Tarjeta SIM reactivada correctamente"
+    elif event == "IMEI_CHANGE":
+        message = "<br>Estimado usuario,<br><br> Tras su confirmacion de un acceso no autorizado a la SIM con iccid = %s hemos procedido a su localizacion y desactivacion. <br><br> La ultima posicion previa a la desactivacion era %s, en las coordenadas exactas de %s, %s <br><br> Rogamos se ponga en contacto con el equipo de seguridad de Jasper para investigar en detalle el evento ocurrido<br><br>   Atentamente,<br><br>    Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (data[3], data[2], data[0],data[1])
+        subject = "Localizacion y desactivacion exitosas"
+    elif event == "DATA_LIMIT":
+        message = "<br>Estimado usuario, Encuentre a continuacion los datos de consumo solicitados previamente: <br><br> Volmen de datos usados: %s <br><br> Fecha de incio: %s <br><br> Volmen de datos usados (SMS): %s <br><br> Volmen de datos usados (Voz): %s<br><br> Atentamente,<br><br>    Equipo de Cisco Jasper<br><img src ='https://assets.sdxcentral.com/cisco-jasper-control-center-product.png'>" % (data[0], data[1], data[2], data[3])
+        subject = "Detalles de consumo"
     #We create thebody with the message depending on the event
     body = MIMEText(message, "html", "uft-8")
     body = MIMEText(message, "html", "uft-8")
     body["From"] = sender_email
     body["To"] = recipient
-    body["Subject"] = "Localizacion y desactivacion exitosas"
+    body["Subject"] = subject
     #We try to make the conection with the SMTP server
     smtp = SMTP_SSL(server_email, port_email)
     #We introduce the credentials of the sender in the SMTP server and send the email.
@@ -70,6 +78,4 @@ def email_action (recipient, data):
     smtp.sendmail(sender_email, recipient, body)
     smtp.quit()
     return "Mensaje enviado"
-
-
 
