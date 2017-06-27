@@ -42,8 +42,8 @@ def get_email(iccid):
     accountid = (getTerminalsDetailsResponse.terminals.terminal[0].accountId)
     print(accountid)
     return accountid
-t == 0
-if t==0
+t = 0
+if t = 0
 a = get_email("80191104961342800866")
 t = t+1
 else
