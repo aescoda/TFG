@@ -18,18 +18,7 @@ def send_email(xml):
 def alert():
     #We will extract the data to use it for the application communications as unicode
     req = request.form
-    event = req['eventType']
-    print event
-    if event == "SIM_STATE_CHANGE":
-        print "va"
-    else:
-        print "nova"
-    print type(event)
-    data = req['data']  
-    #We open a new thread to process the xml data receive as we need to answer Jasper to stop receiving messages
-    t = Thread(target=send_email, args=(data,))
-    t.start()
-    #Jasper will resend the notification unless it receives a status 200 confirming the reception
+    print req
     return '',200
     
     
