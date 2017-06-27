@@ -3,6 +3,5 @@ xml
 geocode
 email
 suds
-smtplib
 threading
 os
