@@ -67,7 +67,6 @@ def email_action (recipient, data):
         subject = "Detalles de consumo"
     #We create thebody with the message depending on the event
     body = MIMEText(message, "html", "uft-8")
-    body = MIMEText(message, "html", "uft-8")
     body["From"] = sender_email
     body["To"] = recipient
     body["Subject"] = subject
