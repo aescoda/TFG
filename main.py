@@ -86,7 +86,7 @@ def response:
     #We deactivate the SIM card as we already have the location
     Terminals.deactivateSIM(iccid)
     #We find the exact location of the SIM with a library created by google to get location information in JSON
-    address = geocoder.google(location, method='reverse')
+    address = str(geocoder.google(location, method='reverse'))
     #We pack the data in an array to use it in the email
     data = (location[0],location[1],iccid,address)
     elif event == "DATA_LIMIT":
