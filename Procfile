@@ -1,1 +1,1 @@
-web: python peticiones.py
+web: python prueba.py
