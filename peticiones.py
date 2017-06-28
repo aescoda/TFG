@@ -2,5 +2,7 @@
 # -*- coding: utf-8 -*-
 import geocoder
 
-g = geocoder.google('Universidad Miguel Hernandez')
-print g.latlng
+location = [38.2749014, -0.6842547] 
+address = geocoder.google(location, method='reverse')
+print address
+
