@@ -1,4 +1,4 @@
 import geocoder
 
-g = geocoder.google('Mountain View, CA')
+g = geocoder.google('Universidad Miguel Hernández')
 print g.latlng
