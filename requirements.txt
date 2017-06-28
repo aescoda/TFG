@@ -1,6 +1,6 @@
 Flask==0.10.1
 xml
-geocode
+geocoder
 email
 suds
 
