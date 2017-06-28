@@ -5,7 +5,7 @@ import geocoder
 g = geocoder.google('Av. de la Vega, 15, 28108 Alcobendas, Madrid')
 print g.latlng
 
-location = [38.2749014, -0.6842547] 
-#address = geocoder.google(location, method='reverse')
-#print str(address)
+location = [40.5339195, -3.6312006] 
+address = geocoder.google(location, method='reverse')
+print str(address)
 
