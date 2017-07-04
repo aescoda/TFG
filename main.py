@@ -42,7 +42,7 @@ Billing = jasper_lib.Billing()
 
 #We define a thread that will run after receiving the notification from Jasper into the /webhook listener. We need to create this
 #thread as Jasper will resend the notification unless it receives a 'status 200' HTTPS message
-def send_email(xml):
+def send_email(req):
     #We mark this variables as global so the assigments done to them in this threat will affect variable used in the /response webhook
     global iccid
     global customer_email
