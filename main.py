@@ -52,7 +52,7 @@ def send_email(req):
     #Here we parse the data receive as a unicode into a elementtree object to process it as XML file and get the iccid affected
     event = req['eventType']
     data = req['data'] 
-    xml = ET.fromstring(xml)
+    xml = ET.fromstring(data)
     iccid = req[0]
     #All the details needed for the first email notification will be obteined through these functions
     admin_details = Terminals.get_account(iccid)
